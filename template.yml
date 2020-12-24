@@ -55,6 +55,9 @@ Resources:
         - !FindInMap [RegionSec, !Ref 'AWS::Region', hvm]
         - !Ref BastionSecurityGroup
       UserData: !Base64 'yum install mysql --assumeyes'
+      Tags:
+      - Key: name
+        Value: CapstoneDemo
 
 Outputs:
   BastionHost:
