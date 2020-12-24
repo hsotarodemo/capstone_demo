@@ -4,12 +4,6 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: Capstone
 
 Parameters:
-  VpcId:
-    Type: AWS::EC2::VPC::Id
-    Default: vpc-a6e909c0    
-  VpcSecurityGroupId:
-    Type: AWS::EC2::SecurityGroup::Id
-    Default: sg-83d232cc
   BastionImageId:
     Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
     Default: /aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-ebs
@@ -18,8 +12,19 @@ Parameters:
     Description: EC2 key used to connect to the bastion host
     Default: cloudformation_capstore
 
-Resources:
+Mappings: 
+  RegionVpc:
+    ap-northeast-1:
+      hvm: "vpc-a6e909c0"
+    ap-southeast-2:
+      hvm: "vpc-24896d42"
+  RegionSec:
+    ap-northeast-1:
+      hvm: "sg-83d232cc"
+    ap-southeast-2:
+      hvm: "sg-0b505abdd71a1f528"
 
+Resources:
   BastionSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties: 
@@ -30,18 +35,18 @@ Resources:
           ToPort: 22
           IpProtocol: 'tcp'
           Description: 'some rule description'
-        - DestinationSecurityGroupId: !Ref VpcSecurityGroupId
+        - DestinationSecurityGroupId: !FindInMap [RegionSec, !Ref 'AWS::Region', hvm]
           IpProtocol: tcp
           FromPort: 3306
           ToPort: 3306
           Description: 'some rule description'
       SecurityGroupIngress: []
-      VpcId: !Ref VpcId
+      VpcId: !FindInMap [RegionVpc, !Ref 'AWS::Region', hvm]
 
   Bastion:
     Type: AWS::EC2::Instance
     Properties:
-      DisableApiTermination: true
+      DisableApiTermination: false
       ImageId: !Ref BastionImageId
       InstanceType: t2.nano
       KeyName: !Ref BastionKeyName
