@@ -6,7 +6,8 @@ Description: Aurora serverless cluster
 Parameters:
   DatabaseName:
     Type: String
-  EngineVersion:
+    Default: 'capstone'
+EngineVersion:
     Type: String
     Default: '5.6'
   MasterUsername:
@@ -15,16 +16,20 @@ Parameters:
   MasterUserPassword:
     Type: String
     NoEcho: true
+    Default: 'capstone'
   VpcId:
     Type: AWS::EC2::VPC::Id
+    Default: vpc-a6e909c0    
   VpcSecurityGroupId:
     Type: AWS::EC2::SecurityGroup::Id
+    Default: sg-83d232cc
   BastionImageId:
     Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
     Default: /aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-ebs
   BastionKeyName:
     Type: AWS::EC2::KeyPair::KeyName
     Description: EC2 key used to connect to the bastion host
+    Default: cloudformation_capstore
 
 Resources:
   Cluster:
