@@ -56,10 +56,12 @@ Resources:
           FromPort: 22
           ToPort: 22
           IpProtocol: 'tcp'
+          Description: 'some rule description'
         - DestinationSecurityGroupId: !Ref VpcSecurityGroupId
           IpProtocol: tcp
           FromPort: 3306
           ToPort: 3306
+          Description: 'some rule description'
       SecurityGroupIngress: []
       VpcId: !Ref VpcId
 
