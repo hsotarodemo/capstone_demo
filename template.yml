@@ -7,7 +7,7 @@ Parameters:
   DatabaseName:
     Type: String
     Default: 'capstone'
-EngineVersion:
+  EngineVersion:
     Type: String
     Default: '5.6'
   MasterUsername:
