@@ -53,8 +53,8 @@ Resources:
       GroupDescription: !Sub 'Bastion for ${AWS::StackName}'
       SecurityGroupEgress:
         - CidrIp: 10.0.0.0/0
-          FromPort: -1
-          ToPort: -1
+          FromPort: 22
+          ToPort: 22
           IpProtocol: 'tcp'
         - DestinationSecurityGroupId: !Ref VpcSecurityGroupId
           IpProtocol: tcp
