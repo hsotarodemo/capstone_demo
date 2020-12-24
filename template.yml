@@ -56,7 +56,7 @@ Resources:
         - !Ref BastionSecurityGroup
       UserData: !Base64 'yum install mysql --assumeyes'
       Tags:
-      - Key: ame
+      - Key: Name
         Value: CapstoneDemo
 
 Outputs:
