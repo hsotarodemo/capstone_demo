@@ -1,22 +1,9 @@
 ---
 AWSTemplateFormatVersion: 2010-09-09
 
-Description: Aurora serverless cluster
+Description: Capstone
 
 Parameters:
-#  DatabaseName:
-#    Type: String
-#    Default: 'capstone'
-#  EngineVersion:
-#    Type: String
-#    Default: '5.6'
-#  MasterUsername:
-#    Type: String
-#    Default: root
-#  MasterUserPassword:
-#    Type: String
-#    NoEcho: true
-#    Default: 'capstone'
   VpcId:
     Type: AWS::EC2::VPC::Id
     Default: vpc-a6e909c0    
@@ -32,20 +19,6 @@ Parameters:
     Default: cloudformation_capstore
 
 Resources:
-  #Cluster:
-  #  Type: AWS::RDS::DBCluster
-  #  Properties:
-  #    Engine: aurora
-  #    EngineMode: serverless
-  #    EngineVersion: !Ref EngineVersion
-  #    DatabaseName: !Ref DatabaseName
-  #    MasterUsername: !Ref MasterUsername
-  #    MasterUserPassword: !Ref MasterUserPassword
-  #    DBClusterIdentifier: !Ref AWS::StackName
-  #    BackupRetentionPeriod: 35
-  #    DeletionProtection: true
-  #    VpcSecurityGroupIds:
-  #      - !Ref VpcSecurityGroupId
 
   BastionSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -79,14 +52,6 @@ Resources:
       UserData: !Base64 'yum install mysql --assumeyes'
 
 Outputs:
-#  Host:
-#    Value: !GetAtt Cluster.Endpoint.Address
-#    Export:
-#      Name: !Sub '${AWS::StackName}Host'
-#  Name:
-#    Value: !Ref DatabaseName
-#    Export:
-#      Name: !Sub '${AWS::StackName}Name'
   BastionHost:
     Value: !GetAtt Bastion.PublicDnsName
     Export:
