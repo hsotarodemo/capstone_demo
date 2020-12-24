@@ -52,7 +52,7 @@ Resources:
       KeyName: !Ref BastionKeyName
       Monitoring: false
       SecurityGroupIds:
-        - !Ref VpcSecurityGroupId
+        - !FindInMap [RegionSec, !Ref 'AWS::Region', hvm]
         - !Ref BastionSecurityGroup
       UserData: !Base64 'yum install mysql --assumeyes'
 
