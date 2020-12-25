@@ -48,7 +48,7 @@ Resources:
     Properties:
       DisableApiTermination: false
       ImageId: !Ref BastionImageId
-      InstanceType: t2.small
+      InstanceType: t2.nano
       KeyName: !Ref BastionKeyName
       Monitoring: false
       SecurityGroupIds:
